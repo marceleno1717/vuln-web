@@ -49,6 +49,12 @@ $db->exec("
         email TEXT,
         created_at TEXT DEFAULT (datetime('now'))
     );
+    CREATE TABLE IF NOT EXISTS feedback (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT,
+        comment TEXT,
+        created_at TEXT DEFAULT (datetime('now'))
+    );
 ");
 
 $count = $db->query("SELECT COUNT(*) FROM users")->fetchColumn();

@@ -1,1 +1,6 @@
-<?php echo "lesa mt3ml4" ?>
+<?php
+session_start();
+$_SESSION = [];
+session_destroy();
+header('Location: /');
+exit;
