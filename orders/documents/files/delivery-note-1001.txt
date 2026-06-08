@@ -1,0 +1,3 @@
+Delivery Note SHOP-1001
+Carrier: ShopNest Fulfillment
+Status: In transit

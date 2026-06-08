@@ -1,0 +1,4 @@
+Invoice SHOP-1001
+Customer: John Doe
+Total: $89.99
+Status: Paid

@@ -14,7 +14,7 @@ layoutHeader('Account');
         <h1 class="form-title">My Account</h1>
         <p class="form-subtitle">Signed in as <?= htmlspecialchars(currentUser()) ?>.</p>
         <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;">
-            <a class="btn btn-outline" href="/xss">View Feedback</a>
+            <a class="btn btn-outline" href="/feedback">View Feedback</a>
             <a class="btn btn-outline" href="/logout">Sign out</a>
         </div>
     </section>

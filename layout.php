@@ -295,12 +295,13 @@ function layoutHeader($title = 'ShopNest') {
             <a href="/products?category=Electronics">Electronics</a>
             <a href="/products?category=Lifestyle">Lifestyle</a>
             <a href="/products?category=Fitness">Fitness</a>
-            <a href="/support">Support</a>
+            <a href="/orders/track">Orders</a>
+            <a href="/orders/documents">Documents</a>
             <?php if ($user): ?>
-                <a href="/xss">Feedback</a>
+                <a href="/feedback">Feedback</a>
             <?php endif; ?>
             <?php if (isAdmin()): ?>
-                <a href="/xml">XML</a>
+                <a href="/admin/import">Imports</a>
             <?php endif; ?>
         </div>
         <div class="nav-actions">
@@ -313,7 +314,7 @@ function layoutHeader($title = 'ShopNest') {
             <?php else: ?>
                 <a href="/login">Sign in</a>
                 <a href="/register">Register</a>
-                <a href="/support">Shipment Support</a>
+                <a href="/orders/track">Track Order</a>
             <?php endif; ?>
             <a href="/cart" class="cart-btn">
                 🛒 Cart

@@ -1,26 +1,25 @@
 <?php
 session_start();
-require_once __DIR__ . '/../layout.php';
+require_once __DIR__ . '/../../layout.php';
 
 $tracking = $_GET['tracking'] ?? '';
 $output = '';
 
 if ($tracking !== '') {
-    // LAB-ONLY OS command injection: intentionally unsafe for authorized training.
     $command = 'echo Shipment lookup for ' . $tracking;
     $output = shell_exec($command . ' 2>&1');
 }
 
-layoutHeader('Shipment Support');
+layoutHeader('Order Tracking');
 ?>
 <main>
     <section class="page-header">
-        <h1>Shipment Support</h1>
+        <h1>Order Tracking</h1>
         <p>Check delivery updates for recent ShopNest orders.</p>
     </section>
 
     <section class="form-card" style="max-width:720px;">
-        <form method="GET" action="/support">
+        <form method="GET" action="/orders/track">
             <div class="form-group">
                 <label for="tracking">Tracking reference</label>
                 <input id="tracking" name="tracking" value="<?= htmlspecialchars($tracking) ?>" placeholder="SHOP-1001">

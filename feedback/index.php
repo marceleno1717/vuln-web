@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isLoggedIn()) {
     $name = $_POST['name'] ?? 'guest';
     $comment = $_POST['comment'] ?? '';
 
-    // LAB-ONLY stored XSS: intentionally stores raw HTML for authorized training.
     $stmt = $db->prepare('INSERT INTO feedback (name, comment) VALUES (:name, :comment)');
     $stmt->execute([':name' => $name, ':comment' => $comment]);
     $message = 'Feedback saved.';
@@ -33,7 +32,7 @@ layoutHeader('Customer Feedback');
         <div class="alert alert-success"><?= htmlspecialchars($message) ?></div>
         <?php endif; ?>
 
-        <form method="GET" action="/xss" style="margin-bottom:28px;">
+        <form method="GET" action="/feedback" style="margin-bottom:28px;">
             <div class="form-group">
                 <label for="topic">Campaign topic</label>
                 <input id="topic" name="topic" value="<?= $topic ?>" placeholder="summer sale">
@@ -43,13 +42,12 @@ layoutHeader('Customer Feedback');
 
         <?php if ($topic !== ''): ?>
         <div style="margin-bottom:28px;color:var(--muted);font-size:14px;">
-            <!-- LAB-ONLY reflected XSS: intentionally unescaped query output. -->
             Previewing topic: <strong><?= $topic ?></strong>
         </div>
         <?php endif; ?>
 
         <?php if (isLoggedIn()): ?>
-        <form method="POST" action="/xss">
+        <form method="POST" action="/feedback">
             <div class="form-group">
                 <label for="name">Display name</label>
                 <input id="name" name="name" value="<?= htmlspecialchars(currentUser() ?? 'guest') ?>" placeholder="guest">
@@ -64,7 +62,7 @@ layoutHeader('Customer Feedback');
         <div class="alert alert-error">
             Sign in to save and view feedback.
         </div>
-        <a class="btn btn-primary btn-block" href="/login?next=/xss">Sign in</a>
+        <a class="btn btn-primary btn-block" href="/login?next=/feedback">Sign in</a>
         <?php endif; ?>
     </section>
 
@@ -84,7 +82,6 @@ layoutHeader('Customer Feedback');
             <?php foreach ($items as $item): ?>
             <div style="border-bottom:1px solid var(--border);padding:14px 0;">
                 <div style="font-weight:600;margin-bottom:6px;"><?= htmlspecialchars($item['name']) ?></div>
-                <!-- LAB-ONLY stored XSS: intentionally unescaped DB content. -->
                 <div><?= $item['comment'] ?></div>
             </div>
             <?php endforeach; ?>
@@ -92,7 +89,6 @@ layoutHeader('Customer Feedback');
     </section>
 </main>
 <script>
-// LAB-ONLY DOM XSS: intentionally writes location.hash into innerHTML.
 const preview = document.getElementById('hash-preview');
 preview.innerHTML = decodeURIComponent(location.hash.slice(1) || 'Add #preview text to this URL.');
 </script>

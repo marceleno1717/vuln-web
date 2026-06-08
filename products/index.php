@@ -11,7 +11,6 @@ $icons = [
 $q = $_GET['q'] ?? '';
 $category = $_GET['category'] ?? '';
 
-// SQLI: raw input in query
 if ($q !== '') {
     $products = $db->query("SELECT * FROM products WHERE name LIKE '%$q%' OR description LIKE '%$q%'")->fetchAll(PDO::FETCH_ASSOC);
 } elseif ($category !== '') {
@@ -25,7 +24,7 @@ layoutHeader('Shop');
 <main>
     <section style="margin-bottom:32px;">
         <form action="/products" method="GET" class="search-bar" style="max-width:560px;">
-            <input type="text" name="q" value="<?= $q /* XSS: reflected */ ?>" placeholder="Search products…">
+            <input type="text" name="q" value="<?= $q ?>" placeholder="Search products…">
             <button type="submit">Search</button>
         </form>
     </section>
@@ -44,7 +43,6 @@ layoutHeader('Shop');
 
     <?php if ($q !== ''): ?>
     <div style="margin-bottom:24px;color:var(--muted);font-size:14px;">
-        <!-- XSS: unescaped search term echoed -->
         Showing results for: <strong><?= $q ?></strong>
         (<?= count($products) ?> items found)
     </div>

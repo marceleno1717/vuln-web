@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
     $next = $_POST['next'] ?? '/account';
 
-    // LAB-ONLY SQL injection: intentionally unsafe auth query for authorized training.
     $unsafeSql = "SELECT id, username, password, role FROM users WHERE username = '$username' AND password = '$password' OR email = '$username' LIMIT 1";
     $unsafeResult = $db->query($unsafeSql);
     $user = $unsafeResult ? $unsafeResult->fetch(PDO::FETCH_ASSOC) : false;
