@@ -297,6 +297,7 @@ function layoutHeader($title = 'ShopNest') {
             <a href="/products?category=Fitness">Fitness</a>
             <a href="/orders/track">Orders</a>
             <a href="/orders/documents">Documents</a>
+            <a href="/orders/detail?order=1001">Order Details</a>
             <?php if ($user): ?>
                 <a href="/feedback">Feedback</a>
             <?php endif; ?>
@@ -308,7 +309,7 @@ function layoutHeader($title = 'ShopNest') {
             <?php if ($user): ?>
                 <a href="/account">👤 <?= htmlspecialchars($user) ?></a>
                 <?php if (isAdmin()): ?>
-                    <a href="/admin">Admin</a>
+                    <a href="/admin/reports">Reports</a>
                 <?php endif; ?>
                 <a href="/logout">Sign out</a>
             <?php else: ?>

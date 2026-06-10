@@ -83,4 +83,21 @@ if ($count == 0) {
             (4, 2, 'john_doe', 'Typing on this is a joy. RGB looks amazing in the dark.', 4);
     ");
 }
+
+$orderCount = $db->query("SELECT COUNT(*) FROM orders")->fetchColumn();
+if ($orderCount == 0) {
+    $db->exec("
+        INSERT INTO orders (id, user_id, total, status, created_at) VALUES
+            (1001, 2, 89.99, 'paid', datetime('now', '-7 days')),
+            (1002, 3, 64.98, 'processing', datetime('now', '-2 days')),
+            (1003, 1, 244.50, 'review', datetime('now', '-1 days'));
+
+        INSERT INTO order_items (order_id, product_id, quantity, price) VALUES
+            (1001, 1, 1, 89.99),
+            (1002, 3, 1, 24.99),
+            (1002, 6, 1, 39.99),
+            (1003, 4, 2, 79.99),
+            (1003, 8, 1, 19.99);
+    ");
+}
 ?>
