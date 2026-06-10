@@ -2,13 +2,13 @@
 session_start();
 require_once __DIR__ . '/../../layout.php';
 
-$file = $_GET['file'] ?? 'invoice-1001.txt';
+$document = $_GET['document'] ?? 'invoice-1001.txt';
 $basePath = __DIR__ . '/files/';
 $content = '';
 $error = '';
 
-if ($file !== '') {
-    $path = $basePath . $file;
+if ($document !== '') {
+    $path = $basePath . $document;
     if (is_readable($path)) {
         $content = file_get_contents($path);
     } else {
@@ -27,10 +27,10 @@ layoutHeader('Order Documents');
     <section class="form-card" style="max-width:760px;">
         <form method="GET" action="/orders/documents">
             <div class="form-group">
-                <label for="file">Document</label>
-                <select id="file" name="file">
-                    <option value="invoice-1001.txt" <?= $file === 'invoice-1001.txt' ? 'selected' : '' ?>>Invoice SHOP-1001</option>
-                    <option value="delivery-note-1001.txt" <?= $file === 'delivery-note-1001.txt' ? 'selected' : '' ?>>Delivery note SHOP-1001</option>
+                <label for="document">Document</label>
+                <select id="document" name="document">
+                    <option value="invoice-1001.txt" <?= $document === 'invoice-1001.txt' ? 'selected' : '' ?>>Invoice SHOP-1001</option>
+                    <option value="delivery-note-1001.txt" <?= $document === 'delivery-note-1001.txt' ? 'selected' : '' ?>>Delivery note SHOP-1001</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Open Document</button>
