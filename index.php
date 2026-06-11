@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/layout.php';
 
 $featured = $db->query("SELECT * FROM products ORDER BY RANDOM() LIMIT 4")->fetchAll(PDO::FETCH_ASSOC);

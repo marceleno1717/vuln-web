@@ -298,6 +298,7 @@ function layoutHeader($title = 'ShopNest') {
             <a href="/orders/track">Orders</a>
             <a href="/orders/documents">Documents</a>
             <a href="/orders/detail?order=1001">Order Details</a>
+            <a href="/orders/live">Live Updates</a>
             <?php if ($user): ?>
                 <a href="/feedback">Feedback</a>
             <?php endif; ?>

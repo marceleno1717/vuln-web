@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once __DIR__ . '/../../bootstrap.php';
 require_once __DIR__ . '/../../layout.php';
 
 $document = $_GET['document'] ?? 'invoice-1001.txt';
